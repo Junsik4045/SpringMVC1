@@ -4,8 +4,7 @@ import hello.servlet.domain.member.Member;
 import hello.servlet.domain.member.MemberRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +16,12 @@ import java.util.List;
 public class SpringMemberControllerV3 {
     private MemberRepository memberRepository = MemberRepository.getInstance();
 
-    @RequestMapping("/new-form")
+    @GetMapping("/new-form")
     public String newForm(){ //문자를 반환해도 되는데 애가 뷰이름으로 알고 프로세스가 진행됨
         return "new-form";
     }
 
-    @RequestMapping("/save")
+    @PostMapping("/save")
     public String save(
             @RequestParam("username") String username,
             @RequestParam("age") int age,
@@ -36,7 +35,7 @@ public class SpringMemberControllerV3 {
     }
 
 
-    @RequestMapping
+    @GetMapping
     public String members(Model model) {
 
         List<Member> members = memberRepository.findAll();
